@@ -2,25 +2,25 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {TextInput} from 'react-native-gesture-handler';
 import {ActionButtonLR} from '../Atomic';
-
+import axios from 'axios';
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-//   const submit = () => {
-//     const data = {
-//       username,
-//       password,
-//     };
-//     axios.post('http://10.0.2.2/data', data)
-//       .then(res => {
-//         console.log(res);
-//       })
-//       .catch(err => {
-//         console.log(err);
-//       });
-//   };
+  const submit = () => {
+    const data = {
+      username,
+      password,
+    };
+    axios.post('http://10.0.2.2/data', data)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   return (
     <View
@@ -68,7 +68,7 @@ const Register = () => {
           />
         </View>
         {username.length > 0 && password.length > 0 && (
-        <ActionButtonLR title="Register" />
+        <ActionButtonLR title="Register" onPress={submit} />
         )}
       </View>
     </View>
