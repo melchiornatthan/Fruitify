@@ -13,7 +13,7 @@ const Title = ({navigation}) => {
       style={{
         alignItems: 'center',
         paddingHorizontal: 20,
-        paddingVertical: 160,
+        paddingVertical: 100,
         margin: 20,
         backgroundColor: '#1E5128',
         borderRadius: 25,
@@ -43,8 +43,8 @@ const Logo = () => {
       <Image
         source={logo}
         style={{
-          width: 100,
-          height: 100,
+          width: 200,
+          height: 200,
         }}
       />
     );

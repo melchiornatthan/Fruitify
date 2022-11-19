@@ -1,76 +1,53 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {View, Text, Image} from 'react-native';
+import { ActionButton } from '../Atomic';
+import logo from '../Title/logo.png'
 
-const Landing = () => {
+const Landing = ({navigation}) => {
+  const handleGoTo = (screen) => {
+    navigation.navigate(screen);
+  };
   return (
     <View
       style={{
         alignItems: 'center',
         justifyContent: 'center',
-        flex: 2,
+        flex:2,
       }}>
       <Text
         style={{
           fontSize: 30,
           fontWeight: 'bold',
+          color:'#0D4C92',
         }}>
         Welcome to Fruitify
       </Text>
+      <Logo/>
       <View styes={{
             marginTop: 20,
       }}>
-        <ActionButton desc="Already Have an Account?" title="Login" />
-        <ActionButton desc="No ? Register Here" title="Register" />
+        <ActionButton desc="Already Have an Account?" title="Login" onPress={() =>handleGoTo('Login')}/>
+        <ActionButton desc="No ? Register Here" title="Register" onPress={() =>handleGoTo('Register')}/>
         </View>
     </View>
   );
 };
 
-const ActionButton = ({desc, title}) => {
+
+
+const Logo = () => {
   return (
-    <View style={{
-        marginTop: 20,
-        alignContent: 'center',
-    }}>
-      <Text style={styles.text.desc}>{desc}</Text>
-      <Button title={title} onPress={() => alert('Hello')} />
-    </View>
+    <Image
+      source={logo}
+      style={{
+        width: 150,
+        height: 150,
+        marginBottom : "20%",
+        marginTop: "10%"
+      }}
+    />
   );
 };
 
-const Button = ({title, onPress}) => {
-  return (
-    <TouchableOpacity style={styles.wrapper.component} onPress={onPress}>
-      <Text style={styles.text.title}>{title}</Text>
-    </TouchableOpacity>
-  );
-};
 
-const styles = {
-  wrapper: {
-    component: {
-      backgroundColor: '#0D4C92',
-      borderRadius: 25,
-      paddingVertical: 10,
-    },
-  },
-  text: {
-    title: {
-      fontSize: 12,
-      fontWeight: 'bold',
-      color: '#EFF5F5',
-      textTransform: 'uppercase',
-      textAlign: 'center',
-    },
-    desc: {
-      fontSize: 17,
-      color: '#497174',
-      fontWeight: 'bold',
-      textAlign: 'center',
-      paddingHorizontal: '15%',
-      marginBottom: 20,
-    },
-  },
-};
 export default Landing;
