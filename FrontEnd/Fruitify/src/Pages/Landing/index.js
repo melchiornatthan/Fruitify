@@ -12,7 +12,7 @@ const Landing = ({navigation}) => {
       style={{
         alignItems: 'center',
         justifyContent: 'center',
-        flex:2,
+        paddingVertical: '10%',
       }}>
       <Text
         style={{
