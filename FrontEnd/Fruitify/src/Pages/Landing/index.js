@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
-import { ActionButton } from '../Atomic';
-import logo from '../Title/logo.png'
+import {ActionButton} from '../Atomic';
+import logo from '../Title/logo.png';
 
 const Landing = ({navigation}) => {
-  const handleGoTo = (screen) => {
+  const handleGoTo = screen => {
     navigation.navigate(screen);
   };
   return (
@@ -12,28 +12,39 @@ const Landing = ({navigation}) => {
       style={{
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: '10%',
+        flex: 1,
+        backgroundColor: '#D61C4E',
+        paddingVertical: '5%',
+        borderRadius: 25,
+        margin: '5%',
       }}>
       <Text
         style={{
           fontSize: 30,
           fontWeight: 'bold',
-          color:'#0D4C92',
+          color: '#FFFFFF',
         }}>
         Welcome to Fruitify
       </Text>
-      <Logo/>
-      <View styes={{
-            marginTop: 20,
-      }}>
-        <ActionButton desc="Already Have an Account?" title="Login" onPress={() =>handleGoTo('Login')}/>
-        <ActionButton desc="No ? Register Here" title="Register" onPress={() =>handleGoTo('Register')}/>
-        </View>
+      <Logo />
+      <View
+        styes={{
+          marginTop: 20,
+        }}>
+        <ActionButton
+          desc="Already Have an Account?"
+          title="Login"
+          onPress={() => handleGoTo('Login')}
+        />
+        <ActionButton
+          desc="No ? Register Here"
+          title="Register"
+          onPress={() => handleGoTo('Register')}
+        />
+      </View>
     </View>
   );
 };
-
-
 
 const Logo = () => {
   return (
@@ -42,12 +53,11 @@ const Logo = () => {
       style={{
         width: 150,
         height: 150,
-        marginBottom : "20%",
-        marginTop: "10%"
+        marginBottom: '20%',
+        marginTop: '10%',
       }}
     />
   );
 };
-
 
 export default Landing;

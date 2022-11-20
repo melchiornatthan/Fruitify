@@ -1,22 +1,27 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
-import {TextInput} from 'react-native-gesture-handler';
+import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import {ActionButtonLR} from '../Atomic';
 import axios from 'axios';
 
-
-const Login = () => {
+const Login = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleGoTo = screen => {
+    navigation.navigate(screen);
+  };
 
   const submit = () => {
     const data = {
       username,
       password,
     };
-    axios.post('http://10.0.2.2/data', data)
+    axios
+      .get('https://dummyjson.com/products/1')
       .then(res => {
         console.log(res);
+        handleGoTo('Home');
       })
       .catch(err => {
         console.log(err);
@@ -24,55 +29,63 @@ const Login = () => {
   };
 
   return (
-    <View
+    <ScrollView
       style={{
-        marginTop: '10%',
-        alignItems: 'center',
-        backgroundColor: '#D6E4E5',
-        paddingVertical: '10%',
-        borderRadius: 25,
-        marginHorizontal: '10%',
+        backgroundColor: '#FFC600',
       }}>
-      <Text
-        style={{
-          fontSize: 30,
-          color: '#F49D1A',
-          marginBottom: 20,
-          fontWeight: 'bold',
-        }}>
-        Login
-      </Text>
       <View
         style={{
-          width: '80%',
+          marginTop: '10%',
+          alignItems: 'center',
+          height: '80%',
+          backgroundColor: '#EFF5F5',
+          paddingTop: '10%',
+          paddingBottom: '20%',
+          borderRadius: 25,
+          marginHorizontal: '10%',
         }}>
+        <Text
+          style={{
+            fontSize: 30,
+            color: '#F49D1A',
+            marginBottom: 20,
+            fontWeight: 'bold',
+          }}>
+          Login
+        </Text>
         <View
           style={{
-            paddingVertical: 5,
+            width: '80%',
           }}>
-          <TextInput
-            style={styles.input}
-            placeholder="Username"
-            value={username}
-            onChangeText={value => setUsername(value)}
-          />
+          <View
+            style={{
+              paddingVertical: 5,
+            }}>
+            <TextInput
+              style={styles.input}
+              placeholder="Username"
+              value={username}
+              onChangeText={value => setUsername(value)}
+            />
+          </View>
+          <View
+            style={{
+              paddingVertical: 5,
+            }}>
+            <TextInput
+              style={styles.input}
+              placeholder="Password"
+              value={password}
+              onChangeText={value => setPassword(value)}
+            />
+          </View>
+
+          {username.length > 0 && password.length > 0 && (
+            <ActionButtonLR title="Sign In" onPress={submit} />
+          )}
         </View>
-        <View
-          style={{
-            paddingVertical: 5,
-          }}>
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            value={password}
-            onChangeText={value => setPassword(value)}
-          />
-        </View>
-        {username.length > 0 && password.length > 0 && (
-        <ActionButtonLR title="Sign In" onPress={submit}/>
-        )}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

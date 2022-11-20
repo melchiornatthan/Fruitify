@@ -3,18 +3,18 @@ import {View, Text, Image} from 'react-native';
 import logo from './logo.png';
 
 const Title = ({navigation}) => {
-    useEffect(() => {
-        setTimeout(() => {
-            navigation.navigate('Landing');
-        },2000);
-    });
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('Landing');
+    }, 2000);
+  });
   return (
     <View
       style={{
         alignItems: 'center',
-        paddingVertical : '30%',
-        paddingHorizontal : '10%',
-        margin:"5%",
+        paddingVertical: '30%',
+        paddingHorizontal: '10%',
+        margin: '5%',
         backgroundColor: '#1E5128',
         borderRadius: 25,
       }}>
@@ -39,15 +39,15 @@ const Title = ({navigation}) => {
 };
 
 const Logo = () => {
-    return (
-      <Image
-        source={logo}
-        style={{
-          width: 200,
-          height: 200,
-        }}
-      />
-    );
-  };
+  return (
+    <Image
+      source={logo}
+      style={{
+        width: 200,
+        height: 200,
+      }}
+    />
+  );
+};
 
 export default Title;
