@@ -1,0 +1,36 @@
+{% extends "Base.html" %}
+
+{% block content %}
+
+
+<body>
+
+
+  <form action="{{url_for("pred")}}"  method="POST" enctype="multipart/form-data">
+    <h4>Click below to upload your <strong>image</strong>.</h4>
+
+    <div class="form-group">
+    <!-- <img src="../static/upload5.png" alt="img" width="20%" height="5%"> -->
+    <label>
+    <input type="file" name="file" id="file" style="display:none" accept="image/*" required>
+    <img src="../static/upload.png" width="50%">
+    </label>
+  </div>
+
+    <div class="container">
+      <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+      <label class="form-check-label" for="exampleCheck1">Make sure you uploaded images related to <strong>1. Apples</strong>, <strong>2. Bananas</strong>, <strong>3. Oranges</strong></label>
+    </div>
+
+    </div>
+  <br>
+    <input type="submit" class="btn btn-secondary" name="Submit and predict" value="Submit and Predict">
+  </form>
+  <br>
+
+</div>
+
+
+</body>
+{% endblock %}
