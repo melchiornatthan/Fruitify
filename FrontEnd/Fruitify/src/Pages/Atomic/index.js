@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 const ActionButton = ({desc, title, onPress}) => {
   return (
@@ -46,11 +46,35 @@ const Button = ({title, onPress}) => {
   );
 };
 
+const ImageButton = ({image, onPress}) => {
+  return (
+    <TouchableOpacity
+      style={{
+        backgroundColor: '#0D4C92',
+        borderRadius: 25,
+        alignSelf: 'flex-end',
+        marginRight: '5%',
+        marginTop: '5%'
+      }}
+      onPress={onPress}>
+      <Image
+        source={image}
+        style={{
+          width: 20,
+          height: 20,
+          alignSelf: 'center',
+          margin: '4%',
+        }}
+      />
+    </TouchableOpacity>
+  );
+};
+
 const styles = {
   wrapper: {
     component: {
-      backgroundColor: '#0D4C92',
-      borderRadius: 25,
+      backgroundColor: '#FF6D28',
+      borderRadius: 15,
       paddingVertical: 10,
     },
   },
@@ -64,13 +88,12 @@ const styles = {
     },
     desc: {
       fontSize: 17,
-      color: '#FFFFFF',
-      fontWeight: 'bold',
+      color: '#222222',
       textAlign: 'center',
       paddingHorizontal: '15%',
-      marginBottom: 20,
+      marginBottom: 5,
     },
   },
 };
 
-export {ActionButton, ActionButtonLR, ActionButtonHome};
+export {ActionButton, ActionButtonLR, ActionButtonHome, ImageButton};

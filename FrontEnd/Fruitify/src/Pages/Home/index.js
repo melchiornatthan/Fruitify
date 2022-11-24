@@ -1,9 +1,11 @@
 import React, {useEffect} from 'react';
 import {Text, StyleSheet, View, Image, SafeAreaView} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {ActionButtonHome} from '../Atomic';
+import {ActionButtonHome, ImageButton} from '../Atomic';
 import logo from '../Title/logo.png';
 import {useState} from 'react';
+import user from './user.png';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 
 const Home = ({navigation}) => {
@@ -13,31 +15,34 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView>
-      <View>
-        <View
+      <View
+        style={{
+          backgroundColor: '#F3EFE0',
+          paddingHorizontal: '2%',
+          paddingTop: '5%',
+          paddingBottom: '5%',
+          marginHorizontal: '2%',
+          marginTop: '2%',
+          borderWidth: 5,
+          borderColor: '#FF731D',
+          borderRadius: 15,
+        }}>
+        <Text
           style={{
-            backgroundColor: '#FFC600',
-            paddingHorizontal: '5%',
-            paddingVertical: '5%',
-            margin: '5%',
-            borderRadius: 25,
+            fontSize: 30,
+            fontWeight: 'bold',
+            alignSelf: 'center',
+            fontFamily: 'sans-serif-condensed',
+            color: '#395144',
           }}>
-          <Text
-            style={{
-              fontSize: 30,
-              fontWeight: 'bold',
-              alignSelf: 'center',
-              color: '#395144',
-            }}>
-            Welcome to Fruitify
-          </Text>
-          <Logo />
-          <ActionButtonHome title="Scan Now" />
-          <ActionButtonHome
-            title="History"
-            onPress={() => handleGoTo('History')}
-          />
-        </View>
+          Welcome to Fruitify
+        </Text>
+        <Logo />
+        <ActionButtonHome title="Scan Now" />
+        <ActionButtonHome
+          title="History"
+          onPress={() => handleGoTo('History')}
+        />
       </View>
     </SafeAreaView>
   );
@@ -48,10 +53,10 @@ const Logo = () => {
     <Image
       source={logo}
       style={{
-        width: 100,
-        height: 100,
+        width: 150,
+        height: 150,
         alignSelf: 'center',
-        marginVertical: '45%',
+        marginVertical: '25%',
       }}
     />
   );
