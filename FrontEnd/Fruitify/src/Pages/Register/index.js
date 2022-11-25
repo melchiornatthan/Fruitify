@@ -34,7 +34,7 @@ const Register = () => {
           alignItems: 'center',
           height: '80%',
           backgroundColor: '#FFFFFF',
-          borderWidth: 5,
+          borderWidth: 2,
           borderColor: '#FF731D',
           paddingTop: '10%',
           paddingBottom: '20%',
