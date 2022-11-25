@@ -53,7 +53,46 @@ const Home = ({navigation}) => {
       }
     })
   }
-
+  const requestGalleryPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: "App Camera Permission",
+          message:"App needs access to your camera ",
+          buttonNeutral: "Ask Me Later",
+          buttonNegative: "Cancel",
+          buttonPositive: "OK"
+        }
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        openGallery();
+      } else {
+        console.log("Camera permission denied");
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+  
+  const openGallery = () => {
+    const option = {
+      mediaType: 'photo',
+      quality : 1,
+    }
+    
+    launchImageLibrary(option, (response) => {console.log('Image picker error');
+      if(response.didCancel){
+        console.log('User cancelled image picker');
+      }else if(response.errorCode){
+        console.log('Image picker error', response.errorMessage);
+      }else{
+        const data = response.assets;
+        setImageCamera(data.uri);
+        console.log(data);
+      }
+    })
+  }
 
 
   const handleGoTo = screen => {
@@ -86,7 +125,7 @@ const Home = ({navigation}) => {
         </Text>
         <Logo />
         {
-          imageCamera != null && <Image source={{uri: imageCamera}} style={{width: 100, height: 100}}/>
+          imageCamera != null && <Image source={imageCamera} style={{width: 100, height: 100}}/>
         }
         
         
@@ -110,7 +149,7 @@ const Home = ({navigation}) => {
           }}>Camera</Text>
         </Pressable>
         <Pressable 
-         onPress={openCamera}
+         onPress={requestGalleryPermission}
          style={{
           padding: 15,
           backgroundColor: '#FF731D',
