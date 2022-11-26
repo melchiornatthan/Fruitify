@@ -9,10 +9,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 import { PermissionsAndroid } from 'react-native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import Info from './info';
+import Apple from './apple.png';
+import Orange from './orange.png';
+import Banana from './banana.png';
 
 const Home = ({navigation}) => {
   const [imageCamera, setImageCamera] = React.useState(null);
-    
+  const [details, setDetails] = useState(0);
   const requestCameraPermission = async () => {
     try {
       const granted = await PermissionsAndroid.request(
@@ -101,6 +105,7 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView>
+      <ScrollView>
       <View
         style={{
           backgroundColor: '#F3EFE0',
@@ -165,6 +170,71 @@ const Home = ({navigation}) => {
           }}>Upload Image</Text>
         </Pressable>
       </View>
+      <View style={{
+        flexDirection: 'row',
+        marginHorizontal: '2%',
+        marginTop: '2%',
+        height: 80,
+      }}>
+        <Pressable 
+        onPress= {() => setDetails(1)}
+         style={{
+          
+          backgroundColor: '#E5D9B6',
+          flex : 1,
+          margin:4,
+          borderRadius: 10,
+         }}
+        ><ImgageIcon file={Apple}/></Pressable>
+        <Pressable 
+        onPress= {() => setDetails(2)}
+         style={{
+          backgroundColor: '#E5D9B6',
+          flex : 1,
+          margin:4,
+          borderRadius: 10,
+         }}
+        ><ImgageIcon file={Banana}/></Pressable>
+        <Pressable 
+        onPress= {() => setDetails(3)}
+         style={{
+          backgroundColor: '#E5D9B6',
+          flex : 1,
+          margin:5,
+          borderRadius: 10,
+         }}
+        ><ImgageIcon file={Orange}/></Pressable>
+        
+      </View>
+      <View>
+        {details == 1 &&<View style={{
+          borderColor: '#FF731D',
+          borderWidth: 5,
+          margin: '5%',
+          borderRadius: 15,
+        }}>
+        <Info fruit="Apple" c="Vitamin C: 9.2mg" protein="Protein: 0.5g" pottasium="Potassium: 214mg" magnesium="Vitamin A: 6mcg"/>
+      </View> }
+
+      {details == 2 &&<View style={{
+          borderColor: '#FF731D',
+          borderWidth: 5,
+          margin: '5%',
+          borderRadius: 15,
+        }}><Info fruit="Banana" c="Vitamin C: 10.3mg" protein="Protein: 1.3g" pottasium="Potassium: 422mg" magnesium="Magnesium: 31.9mg"/>
+        </View> }
+        
+        {details == 3 &&<View style={{
+          borderColor: '#FF731D',
+          borderWidth: 5,
+          margin: '5%',
+          borderRadius: 15,
+        }}>
+        <Info fruit="Orange" c="Vitamin C: 82.7mg" protein="Protein: 1.3g" pottasium="Potassium: 232mg" magnesium="Calcium: 60.2mg"/>
+      </View>}
+      
+      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -182,6 +252,21 @@ const Logo = () => {
     />
   );
 };
+
+const ImgageIcon = (props) => {
+  return (
+    <Image
+      source={props.file}
+      style={{
+        width: 30,
+        height: 30,
+        alignSelf: 'center',
+        marginVertical: '20%',
+      }}
+    />
+  );
+};
+
 
 const Item = ({firstName, lastName}) => {
   return (
