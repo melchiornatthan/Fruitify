@@ -1,6 +1,6 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {Landing, Title, Register, Login, Home, History, Dashboard} from '../Pages';
+import {Landing, Title, Register, Login, Home, History, Dashboard, Result} from '../Pages';
 
 const Stack = createStackNavigator();
 
@@ -41,6 +41,11 @@ const Router = () => {
       <Stack.Screen
         name="Dashboard"
         component={Dashboard}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Result"
+        component={Result}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

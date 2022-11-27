@@ -4,8 +4,8 @@ from tensorflow.keras.preprocessing import image
 from PIL import Image, ImageFile
 from io import BytesIO
 
-quality_model=load_model(r'C:\Users\fadel\Documents\data rpl\model1\local_rotten_lr2_final.h5')
-clf_model=load_model(r'C:\Users\fadel\Documents\data rpl\model1\local_fruit_final.h5')
+quality_model=load_model(r'C:\Users\Melchior Natthan\Documents\Mirror\SIVITAS AKADEMIKA\SEMESTER 5\RPL\Fruitify\Machine Learning\model1\local_rotten_lr2_final.h5')
+clf_model=load_model(r'C:\Users\Melchior Natthan\Documents\Mirror\SIVITAS AKADEMIKA\SEMESTER 5\RPL\Fruitify\Machine Learning\model1\local_rotten_lr2_final.h5')
 
 
 # reads frfom file object

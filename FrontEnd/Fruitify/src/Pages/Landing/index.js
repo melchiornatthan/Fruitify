@@ -4,7 +4,7 @@ import {ActionButton} from '../Atomic';
 import logo from '../Title/logo.png';
 
 const Landing = ({navigation}) => {
-  const handleGoTo = screen => {
+  const handleGoTo = (screen) => {
     navigation.navigate(screen);
   };
   return (

@@ -17,6 +17,7 @@ import Banana from './banana.png';
 const Home = ({navigation}) => {
   const [imageCamera, setImageCamera] = React.useState(null);
   const [details, setDetails] = useState(0);
+  
   const requestCameraPermission = async () => {
     try {
       const granted = await PermissionsAndroid.request(
@@ -51,7 +52,7 @@ const Home = ({navigation}) => {
       }else if(response.errorCode){
         console.log('Image picker error', response.errorMessage);
       }else{
-        const data = response.assets;
+        const data = response.assets[0];
         setImageCamera(data);
         console.log(data);
       }
@@ -91,17 +92,20 @@ const Home = ({navigation}) => {
       }else if(response.errorCode){
         console.log('Image picker error', response.errorMessage);
       }else{
-        const data = response.assets;
-        setImageCamera(data.uri);
+        const data = response.assets[0];
+        setImageCamera(data);
         console.log(data);
+        navigation.navigate('Result', {
+          uri : data.uri,
+          type : data.type,
+           name : data.fileName,
+         });
       }
     })
   }
 
 
-  const handleGoTo = screen => {
-    navigation.navigate(screen);
-  };
+ 
 
   return (
     <SafeAreaView>
@@ -130,7 +134,7 @@ const Home = ({navigation}) => {
         </Text>
         <Logo />
         {
-          imageCamera != null && <Image source={imageCamera} style={{width: 100, height: 100}}/>
+          imageCamera != null && <Image source={{uri : imageCamera.uri}} style={{width: 100, height: 100}}/>
         }
         
         

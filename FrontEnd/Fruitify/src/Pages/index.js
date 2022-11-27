@@ -6,4 +6,5 @@ import Register from './Register';
 import Home from './Home';
 import History from './History';
 import Dashboard from './Dashboard';
-export {Landing, Title, Login, Register, Home, History,Dashboard};
+import Result from './Result';
+export {Landing, Title, Login, Register, Home, History,Dashboard, Result};
