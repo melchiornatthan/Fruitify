@@ -26,24 +26,27 @@ const Register = () => {
   return (
     <ScrollView
       style={{
-        backgroundColor: '#FFC600',
+        backgroundColor: '#EFEAD8',
       }}>
       <View
         style={{
           marginTop: '10%',
           alignItems: 'center',
           height: '80%',
-          backgroundColor: '#EFF5F5',
+          backgroundColor: '#FFFFFF',
+          borderWidth: 2,
+          borderColor: '#FF731D',
           paddingTop: '10%',
           paddingBottom: '20%',
-          borderRadius: 25,
+          borderRadius: 15,
           marginHorizontal: '10%',
         }}>
         <Text
           style={{
-            fontSize: 30,
+            fontSize: 35,
             color: '#F49D1A',
             marginBottom: 20,
+            fontFamily: 'sans-serif-condensed',
             fontWeight: 'bold',
           }}>
           Register
@@ -85,9 +88,9 @@ const Register = () => {
 
 const styles = StyleSheet.create({
   input: {
-    borderWidth: 5,
-    borderColor: '#A4BE7B',
-    borderRadius: 25,
+    borderWidth: 2,
+    borderColor: '#5F9DF7',
+    borderRadius: 15,
     paddingVertical: 12,
     paddingHorizontal: 18,
     fontSize: 14,

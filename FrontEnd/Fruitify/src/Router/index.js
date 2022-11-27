@@ -1,12 +1,12 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {Landing, Title, Register, Login, Home, History} from '../Pages';
+import {Landing, Title, Register, Login, Home, History, Dashboard} from '../Pages';
 
 const Stack = createStackNavigator();
 
 const Router = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName='Title'>
       <Stack.Screen
         name="Title"
         component={Title}
@@ -37,6 +37,11 @@ const Router = () => {
       <Stack.Screen
         name="History"
         component={History}
+      />
+      <Stack.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

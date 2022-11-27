@@ -13,16 +13,19 @@ const Landing = ({navigation}) => {
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
-        backgroundColor: '#D61C4E',
+        borderWidth: 5,
+        borderColor: '#8CC0DE',
+        backgroundColor: '#EFEAD8',
         paddingVertical: '5%',
-        borderRadius: 25,
-        margin: '5%',
+        borderRadius: 10,
+        margin: '2%',
       }}>
       <Text
         style={{
-          fontSize: 30,
+          fontSize: 35,
           fontWeight: 'bold',
-          color: '#FFFFFF',
+          fontFamily: 'sans-serif-condensed',
+          color: '#FF6464',
         }}>
         Welcome to Fruitify
       </Text>

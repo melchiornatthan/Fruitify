@@ -12,11 +12,11 @@ const Title = ({navigation}) => {
     <View
       style={{
         alignItems: 'center',
-        paddingVertical: '30%',
+        paddingVertical: '35%',
         paddingHorizontal: '10%',
-        margin: '5%',
-        backgroundColor: '#1E5128',
-        borderRadius: 25,
+        margin: '2%',
+        backgroundColor: '#FF731D',
+        borderRadius: 15,
       }}>
       <View
         style={{
