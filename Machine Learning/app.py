@@ -13,6 +13,7 @@ import matplotlib
 matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 import base64
+import json
 
 
 app = Flask(__name__)
@@ -21,8 +22,8 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
-@app.route('/predictionFruit', methods=['GET','POST'])
-def predFruit():
+@app.route('/prediction', methods=['GET','POST'])
+def pred():
     if request.method=='POST':
          file = request.files['file']
          org_img, img=tf_model.preprocess(file)
@@ -30,6 +31,10 @@ def predFruit():
          print(img.shape)
          fruit_dict=tf_model.classify_fruit(img)
          rotten=tf_model.check_rotten(img)
+         output = {
+            'buah': fruit_dict,
+            'kualitas': rotten,
+         }
 
          img_x=BytesIO()
          plt.imshow(org_img/255.0)
@@ -39,25 +44,7 @@ def predFruit():
          plot_url=base64.b64encode(img_x.getvalue()).decode('utf8')
         #  plt.use('Agg')
 
-    return fruit_dict
-@app.route('/predictionQuality', methods=['GET','POST'])
-def predROtten():
-    if request.method=='POST':
-         file = request.files['file']
-         org_img, img=tf_model.preprocess(file)
 
-         print(img.shape)
-         fruit_dict=tf_model.classify_fruit(img)
-         rotten=tf_model.check_rotten(img)
-
-         img_x=BytesIO()
-         plt.imshow(org_img/255.0)
-         plt.savefig(img_x,format='png')
-         plt.close()
-         img_x.seek(0)
-         plot_url=base64.b64encode(img_x.getvalue()).decode('utf8')
-        #  plt.use('Agg')
-
-    return rotten
+    return output
 if __name__=='__main__':
     app.run(debug=True)
