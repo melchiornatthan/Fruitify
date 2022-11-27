@@ -4,8 +4,8 @@ from tensorflow.keras.preprocessing import image
 from PIL import Image, ImageFile
 from io import BytesIO
 
-quality_model=load_model(r'C:\Users\fadel\Documents\data rpl\model\rottenvsfresh.h5')
-clf_model=load_model(r'C:\Users\fadel\Documents\data rpl\model\fruitcategory.h5')
+quality_model=load_model(r'C:\Users\fadel\Documents\data rpl\model1\local_rotten_lr2_final.h5')
+clf_model=load_model(r'C:\Users\fadel\Documents\data rpl\model1\local_fruit_final.h5')
 
 
 # reads frfom file object
@@ -23,8 +23,12 @@ def preprocess(file):
 
 # return [prob_for_fresh, prob_for_rotten]
 def check_rotten(img):
-    return [round(100*quality_model.predict(img)[0][0],3),round(100*(1-quality_model.predict(img)[0][0]),3)]
+    #return [round(100*quality_model.predict(img)[0][0],3),round(100*(1-quality_model.predict(img)[0][0]),3)]
+    rotten_dict={}
+    rotten_dict['fresh']= round(100*quality_model.predict(img)[0][0],3)
+    rotten_dict['rotten']= round(100*(1-quality_model.predict(img)[0][0]),3)
 
+    return rotten_dict
 
 # return dict... {'apple':prob, 'banana':prob, 'orange':prob}
 def classify_fruit(img):
