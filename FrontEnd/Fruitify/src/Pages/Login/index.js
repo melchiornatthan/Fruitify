@@ -14,19 +14,21 @@ const Login = ({navigation}) => {
   };
 
   const submit = () => {
-    const data = {
-      username,
-      password,
-    };
-    axios
-      .get('https://dummyjson.com/products/1')
-      .then(res => {
-        console.log(res);
-        handleGoTo('Dashboard');
-      })
-      .catch(err => {
-        console.log(err);
-      });
+   
+      // const data = {
+      //   identifier : username,
+      //   password : password,
+      // };
+      // axios
+      //   .post('http://10.10.54.212:1337/api/auth/local', data)
+      //   .then(res => {
+      //     console.log(res);
+          handleGoTo('Home')
+        // })
+        // .catch(err => {
+        //   console.log(err);
+        // });
+    
   };
 
   return (

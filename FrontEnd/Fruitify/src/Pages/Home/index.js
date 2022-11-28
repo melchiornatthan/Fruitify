@@ -55,6 +55,11 @@ const Home = ({navigation}) => {
         const data = response.assets[0];
         setImageCamera(data);
         console.log(data);
+        navigation.navigate('Result', {
+          uri : data.uri,
+          type : data.type,
+           name : data.fileName,
+         });
       }
     })
   }
@@ -133,9 +138,7 @@ const Home = ({navigation}) => {
           Welcome to Fruitify
         </Text>
         <Logo />
-        {
-          imageCamera != null && <Image source={{uri : imageCamera.uri}} style={{width: 100, height: 100}}/>
-        }
+       
         
         
         <Pressable 
@@ -174,10 +177,21 @@ const Home = ({navigation}) => {
           }}>Upload Image</Text>
         </Pressable>
       </View>
+      <Text
+          style={{
+            fontSize: 40,
+            fontWeight: 'bold',
+            paddingLeft: 20,
+            paddingVertical: 10,
+            fontFamily: 'sans-serif-condensed',
+            color: '#395144',
+          }}>
+          Take A Look At Your Fruit Nutritions!
+        </Text>
       <View style={{
         flexDirection: 'row',
         marginHorizontal: '2%',
-        marginTop: '2%',
+        marginVertical: '10%',
         height: 80,
       }}>
         <Pressable 
@@ -251,7 +265,7 @@ const Logo = () => {
         width: 150,
         height: 150,
         alignSelf: 'center',
-        marginVertical: '20%',
+        marginVertical: '25%',
       }}
     />
   );

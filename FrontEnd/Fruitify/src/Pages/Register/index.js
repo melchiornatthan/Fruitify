@@ -4,19 +4,25 @@ import {TextInput, ScrollView} from 'react-native-gesture-handler';
 import {ActionButtonLR} from '../Atomic';
 import axios from 'axios';
 
-const Register = () => {
+const Register = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
+  const handleGoTo = screen => {
+    navigation.navigate(screen);
+  };
   const submit = () => {
     const data = {
-      username,
-      password,
+      username : username,
+      password : password,
+      email : email,
     };
     axios
-      .post('http://10.0.2.2/data', data)
+      .post('http://10.10.54.212:1337/api/auth/local/register', data)
       .then(res => {
         console.log(res);
+        handleGoTo('Login')
       })
       .catch(err => {
         console.log(err);
@@ -72,12 +78,23 @@ const Register = () => {
             }}>
             <TextInput
               style={styles.input}
+              placeholder="Email"
+              value={email}
+              onChangeText={value => setEmail(value)}
+            />
+          </View>
+          <View
+            style={{
+              paddingVertical: 5,
+            }}>
+            <TextInput
+              style={styles.input}
               placeholder="Password"
               value={password}
               onChangeText={value => setPassword(value)}
             />
           </View>
-          {username.length > 0 && password.length > 0 && (
+          {username.length > 0 && password.length > 0 && email.length > 0 && (
             <ActionButtonLR title="Register" onPress={submit} />
           )}
         </View>
