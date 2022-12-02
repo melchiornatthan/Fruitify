@@ -3,7 +3,9 @@ import React, {useState} from 'react';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import {ActionButtonLR} from '../Atomic';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import LinearGradient from 'react-native-linear-gradient';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Login = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -15,45 +17,46 @@ const Login = ({navigation}) => {
 
   const submit = () => {
    
-      // const data = {
-      //   identifier : username,
-      //   password : password,
-      // };
-      // axios
-      //   .post('http://10.10.54.212:1337/api/auth/local', data)
-      //   .then(res => {
-      //     console.log(res);
-          handleGoTo('Home')
-        // })
-        // .catch(err => {
-        //   console.log(err);
-        // });
+      const data = {
+        identifier : username,
+        password : password,
+      };
+      axios
+        .post('http://10.10.56.34:1337/api/auth/local', data)
+        .then(res => {
+          console.log(res);
+          AsyncStorage.setItem('token', res.data.jwt);
+          navigation.navigate('Dashboard');
+        })
+        .catch(err => {
+          console.log(err);
+        });
     
   };
 
   return (
-    <ScrollView
+    <SafeAreaView
       style={{
-        backgroundColor: '#c',
+        flex:1,
       }}>
       <View
         style={{
-          marginTop: '10%',
+          margin:'3%',
           alignItems: 'center',
-          height: '80%',
-          backgroundColor: '#FFFFFF',
+          flex:1,
+          justifyContent: 'center',
+          backgroundColor: '#EFEAD8',
           borderWidth: 2,
           borderColor: '#FF731D',
-          paddingTop: '10%',
-          paddingBottom: '20%',
+          padding:'3%',
           borderRadius: 15,
-          marginHorizontal: '10%',
+         
         }}>
         <Text
           style={{
             fontSize: 40,
             color: '#F49D1A',
-            marginBottom: 20,
+            marginBottom: '70%',
             fontFamily: 'sans-serif-condensed',
             fontWeight: 'bold',
           }}>
@@ -91,7 +94,7 @@ const Login = ({navigation}) => {
           )}
         </View>
       </View>
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 

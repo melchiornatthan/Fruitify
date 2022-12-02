@@ -6,12 +6,14 @@ import axios from "axios";
 const Result = ({ route, navigation }) => {
     const [fruit, setFruit] = React.useState(null);
     const [quality, setQuality] = React.useState(null);
-    const { uri, type, name } = route.params;
+    const { uri, type, name,jwt } = route.params;
    
-    
-
-
-      let uploadImage = async () => {
+    useEffect(() => {
+      setTimeout(() => {
+       uploadImage();
+      }, 5000);
+    });
+      const uploadImage = async () => {
         console.log("Requesting");
         const formdata = new FormData();
         formdata.append("file", {
@@ -19,8 +21,8 @@ const Result = ({ route, navigation }) => {
           type : type,
           name : name
       });
-      axios
-        .post('http://10.10.55.41:5000/prediction', formdata,{
+        axios
+        .post('http://10.10.56.112:5000/prediction', formdata,{
           headers: {
             "Content-Type": "multipart/form-data",
           }
@@ -41,13 +43,33 @@ const Result = ({ route, navigation }) => {
           }else {
             setQuality(0);
           }
+
+          submitHistory();
         }
         )
         .catch(err => {
           console.log(err);
         });
-        }
+      };
+        
     
+        const submitHistory = async () => {
+          const dataToken = await AsyncStorage.getItem('token');
+          console.log(dataToken);
+          const data = '{"fruitName":'+fruit+',"fruitQuality":'+quality+',"imageURL":'+uri+'}';
+           axios
+            .post('http://10.10.56.34:1337/api/history/createHistory', data, {
+              headers: {
+                Authorization : 'Bearer ' + dataToken,
+              }})
+            .then(res => {
+              console.log(res);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        
+      };
   
     return (
         <View style={{ 
@@ -76,7 +98,7 @@ const Result = ({ route, navigation }) => {
           style={{
             fontSize: 30,
             fontWeight: 'bold',
-            margin : 10,
+            margin : 5,
             alignSelf: 'center',
             fontFamily: 'sans-serif-condensed',
             color: '#395144',
@@ -91,7 +113,7 @@ const Result = ({ route, navigation }) => {
           style={{
             fontSize: 30,
             fontWeight: 'bold',
-            margin : 10,
+            margin : 5,
             alignSelf: 'center',
             fontFamily: 'sans-serif-condensed',
             color: '#395144',
@@ -106,7 +128,7 @@ const Result = ({ route, navigation }) => {
           style={{
             fontSize: 30,
             fontWeight: 'bold',
-            margin : 10,
+            margin : 5,
             alignSelf: 'center',
             fontFamily: 'sans-serif-condensed',
             color: '#395144',
@@ -121,7 +143,7 @@ const Result = ({ route, navigation }) => {
           style={{
             fontSize: 30,
             fontWeight: 'bold',
-            margin : 10,
+            margin : 5,
             alignSelf: 'center',
             fontFamily: 'sans-serif-condensed',
             color: '#395144',
@@ -136,7 +158,7 @@ const Result = ({ route, navigation }) => {
           style={{
             fontSize: 30,
             fontWeight: 'bold',
-            margin : 10,
+            margin : 5,
             alignSelf: 'center',
             fontFamily: 'sans-serif-condensed',
             color: '#395144',
@@ -145,28 +167,14 @@ const Result = ({ route, navigation }) => {
         </Text>
             </View>
         }
-<Pressable 
-         onPress={uploadImage}
-         style={{
-          padding: 15,
-          backgroundColor: '#FF731D',
-          alignSelf: 'center',
-          borderRadius: 10,
-          marginBottom: 10,
-         }}
-        >
-          <Text style={{
-            color: 'white',
-            fontSize: 20,
-            fontWeight: 'bold',
-          }}>Check Now</Text>
-        </Pressable>
+
 
         
         
         </View>
     );
 };
+
 
 
 export default Result;

@@ -1,28 +1,34 @@
 import React, {useEffect} from 'react';
-import {View, Text, Image} from 'react-native';
+import {SafeAreaView, View,Text, Image} from 'react-native';
 import logo from './logo.png';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Title = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Landing');
+      handleGetToken();
     }, 2000);
   });
+
+  const handleGetToken = async () => {
+    const dataToken = await AsyncStorage.getItem('token');
+    if(dataToken){
+      navigation.replace('Home');
+    }else{
+      navigation.replace('Landing');
+    }
+  };
   return (
-    <View
+    <SafeAreaView
       style={{
         alignItems: 'center',
-        paddingVertical: '35%',
-        paddingHorizontal: '10%',
-        margin: '2%',
+        flex:1,
+        justifyContent: 'center',
+        margin:'5%',
         backgroundColor: '#FF731D',
         borderRadius: 15,
       }}>
-      <View
-        style={{
-          marginTop: 40,
-          marginBottom: 20,
-        }}>
+      <View>
         <Logo />
       </View>
 
@@ -34,7 +40,7 @@ const Title = ({navigation}) => {
         }}>
         Fruitify
       </Text>
-    </View>
+    </SafeAreaView>
   );
 };
 

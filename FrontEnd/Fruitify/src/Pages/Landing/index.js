@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import {ActionButton} from '../Atomic';
 import logo from '../Title/logo.png';
 
@@ -8,7 +9,7 @@ const Landing = ({navigation}) => {
     navigation.navigate(screen);
   };
   return (
-    <View
+    <SafeAreaView
       style={{
         alignItems: 'center',
         justifyContent: 'center',
@@ -45,7 +46,7 @@ const Landing = ({navigation}) => {
           onPress={() => handleGoTo('Register')}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

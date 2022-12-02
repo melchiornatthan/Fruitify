@@ -14,7 +14,7 @@ import Apple from './apple.png';
 import Orange from './orange.png';
 import Banana from './banana.png';
 
-const Home = ({navigation}) => {
+const Home = ({route, navigation}) => {
   const [imageCamera, setImageCamera] = React.useState(null);
   const [details, setDetails] = useState(0);
   
@@ -43,6 +43,7 @@ const Home = ({navigation}) => {
   const openCamera = () => {
     const option = {
       mediaType: 'photo',
+      saveToPhotos: true,
       quality : 1,
     }
     
@@ -113,7 +114,11 @@ const Home = ({navigation}) => {
  
 
   return (
-    <SafeAreaView>
+    <SafeAreaView 
+    style={{
+      flex: 1,
+    }}
+    >
       <ScrollView>
       <View
         style={{
@@ -191,7 +196,7 @@ const Home = ({navigation}) => {
       <View style={{
         flexDirection: 'row',
         marginHorizontal: '2%',
-        marginVertical: '10%',
+        marginVertical: '2%',
         height: 80,
       }}>
         <Pressable 
@@ -265,7 +270,7 @@ const Logo = () => {
         width: 150,
         height: 150,
         alignSelf: 'center',
-        marginVertical: '25%',
+        marginVertical: '55%',
       }}
     />
   );

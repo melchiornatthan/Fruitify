@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {TextInput, ScrollView} from 'react-native-gesture-handler';
 import {ActionButtonLR} from '../Atomic';
 import axios from 'axios';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Register = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -19,7 +20,7 @@ const Register = ({navigation}) => {
       email : email,
     };
     axios
-      .post('http://10.10.54.212:1337/api/auth/local/register', data)
+      .post('http://10.10.56.34:1337/api/auth/local/register', data)
       .then(res => {
         console.log(res);
         handleGoTo('Login')
@@ -30,28 +31,29 @@ const Register = ({navigation}) => {
   };
 
   return (
-    <ScrollView
+    <SafeAreaView
+    style={{
+      flex:1,
+    }}>
+   
+   <View
       style={{
-        backgroundColor: '#EFEAD8',
+        margin:'3%',
+        alignItems: 'center',
+        flex:1,
+        justifyContent: 'center',
+        backgroundColor: '#FFFFFF',
+        borderWidth: 2,
+        borderColor: '#FF731D',
+        padding:'3%',
+        borderRadius: 15,
+       
       }}>
-      <View
-        style={{
-          marginTop: '10%',
-          alignItems: 'center',
-          height: '80%',
-          backgroundColor: '#FFFFFF',
-          borderWidth: 2,
-          borderColor: '#FF731D',
-          paddingTop: '10%',
-          paddingBottom: '20%',
-          borderRadius: 15,
-          marginHorizontal: '10%',
-        }}>
         <Text
           style={{
             fontSize: 35,
             color: '#F49D1A',
-            marginBottom: 20,
+            marginBottom: '50%',
             fontFamily: 'sans-serif-condensed',
             fontWeight: 'bold',
           }}>
@@ -99,7 +101,7 @@ const Register = ({navigation}) => {
           )}
         </View>
       </View>
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 
