@@ -1,30 +1,31 @@
-import cv2
+# Import the necessary libraries
+import sounddevice as sd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal
 
-cam = cv2.VideoCapture(0)
+# Define the sample rate and duration of the recording
+fs = 44100  # Sample rate (Hz)
+duration = 5  # Duration (s)
 
-cv2.namedWindow("test")
+# Record audio for the specified duration
+recording = sd.rec(int(duration * fs), samplerate=fs, channels=1)
+sd.wait()  # Wait until the recording is finished
 
-img_counter = 0
+# Compute the short-time Fourier transform of the signal
+f, t, Zxx = signal.stft(recording, fs=fs, nperseg=1024)
 
-while True:
-    ret, frame = cam.read()
-    if not ret:
-        print("failed to grab frame")
-        break
-    cv2.imshow("test", frame)
+# Compute the magnitude of the STFT
+Xmag = np.abs(Zxx)
 
-    k = cv2.waitKey(1)
-    if k%256 == 27:
-        # ESC pressed
-        print("Escape hit, closing...")
-        break
-    elif k%256 == 32:
-        # SPACE pressed
-        img_name = "opencv_frame_{}.png".format(img_counter)
-        cv2.imwrite(img_name, frame)
-        print("{} written!".format(img_name))
-        img_counter += 1
+# Find the dominant frequency in each frame
+f_dominant = np.argmax(Xmag, axis=0)
 
-cam.release()
+# Convert the frame index to frequency (Hz)
+f_dominant = f[f_dominant]
 
-cv2.destroyAllWindows()
+# Plot the dominant frequency over time
+plt.plot(t, f_dominant)
+plt.xlabel('Time (s)')
+plt.ylabel('Frequency (Hz)')
+plt.show()
